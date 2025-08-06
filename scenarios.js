@@ -1,18 +1,6 @@
 console.log("connected - scenarios - v1");
 
 document.addEventListener("DOMContentLoaded", (event) => {
-    // Initialize ScrollSmoother, Desktop only
-    const isTouchDevice = ScrollTrigger.isTouch; // true for touch devices
-
-    ScrollSmoother.create({
-        wrapper: "#smooth-wrapper",
-        content: "#smooth-content",
-        smooth: isTouchDevice ? 0 : 1,
-        effects: !isTouchDevice,
-        ignoreMobileResize: true,
-        normalizeScroll: true
-    });
-    
     let activeItem = null;
 
     gsap.utils.toArray(".scenario-item").forEach((item) => {
@@ -87,72 +75,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 activeItem = item;
             }
         }); 
-    });
-    
-    // Defining freeze scroll function
-    function freezeScroll() {
-        if (ScrollSmoother.get() && !ScrollTrigger.isTouch) {
-            ScrollSmoother.get().paused(true);
-            document.querySelector(".smooth-wrapper").style.pointerEvents = "none";
-        } else {
-            document.body.style.overflow = "hidden";
-            document.body.style.touchAction = "none";
-        }
-    }
-
-    // Defining resume scroll function
-    function resumeScroll() {
-        if (ScrollSmoother.get() && !ScrollTrigger.isTouch) {
-            ScrollSmoother.get().paused(false);
-            document.querySelector(".smooth-wrapper").style.pointerEvents = "auto";
-        } else {
-            document.body.style.overflow = "";
-            document.body.style.touchAction = "";
-        }
-    }
-
-    // Nav color animation
-    let navScrollTrigger = document.querySelector(".nav-light2dark");
-
-    gsap.to("html", {
-        scrollTrigger: {
-            trigger: navScrollTrigger,
-            start: "top 5%",
-            end: "top top",
-            scrub: true,
-        },
-        "--_colors---colors--nav-color": "#07291D",
-    });
-    
-    let navTrigger = document.querySelector(".nav-lottie");
-    let colorTarget = document.documentElement;
-    let lastColor = getComputedStyle(colorTarget).getPropertyValue("--_colors---colors--nav-color").trim();
-
-    const observer = new MutationObserver(() => {
-        let newColor = getComputedStyle(colorTarget).getPropertyValue("--_colors---colors--nav-color").trim();
-        if (newColor !== lastColor) {
-            lastColor = newColor;
-            console.log("color variable changed to", lastColor);
-        }
-    });
-
-    observer.observe(colorTarget, { attributes: true, attributeFilter: ["style"] });
-
-    let toggled = false;
-    let savedColor = lastColor;
-
-    navTrigger.addEventListener("click", () => {
-        let currentColor = getComputedStyle(colorTarget).getPropertyValue("--_colors---colors--nav-color").trim();
-
-        if (!toggled) {
-            savedColor = currentColor;
-            gsap.to(colorTarget, { "--_colors---colors--nav-color": "#F9F7F0" });
-            freezeScroll();
-        } else {
-            gsap.to(colorTarget, { "--_colors---colors--nav-color": savedColor });
-            resumeScroll();
-        }
-        toggled = !toggled;
     });
 
     // Scroll Trigger Refresh after build
