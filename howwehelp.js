@@ -1,7 +1,7 @@
-console.log("connected - how we help - v1");
+console.log("connected - how we help - v1.5");
 
 document.addEventListener("DOMContentLoaded", (event) => {
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText)
+    gsap.registerPlugin(ScrollTrigger, SplitText)
 
     const matchM = gsap.matchMedia();
 
