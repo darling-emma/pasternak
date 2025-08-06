@@ -1,16 +1,13 @@
-console.log("connected - per page - v1");
+console.log("connected - per page - v1.5");
 
 document.addEventListener("DOMContentLoaded", (event) => {
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
-    // Initialize ScrollSmoother, Desktop only
-    const isTouchDevice = ScrollTrigger.isTouch; // true for touch devices
-
+    // Initialize ScrollSmoother
     ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
-        smooth: isTouchDevice ? 0 : 1,
-        effects: !isTouchDevice,
+        smooth: 1,
         ignoreMobileResize: true,
         normalizeScroll: true
     });
