@@ -1,6 +1,6 @@
-console.log("connected - scenarios - v1");
+console.log("connected - scenarios - v1.5");
 
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", (event) => {    
     let activeItem = null;
 
     gsap.utils.toArray(".scenario-item").forEach((item) => {
@@ -75,21 +75,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 activeItem = item;
             }
         }); 
-    });
-
-    // Scroll Trigger Refresh after build
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            ScrollTrigger.refresh();
-        }, 250);
-    });
-    
-    // Scroll Trigger Refresh on Resize
-    window.addEventListener('resize', () => {
-        // Debounce the refresh call to prevent performance issues during rapid resizing
-        clearTimeout(window.refreshTimeout);
-        window.refreshTimeout = setTimeout(() => {
-          	ScrollTrigger.refresh();
-        }, 250); // Adjust the debounce delay as needed (e.g., 250ms)
     });
 });
