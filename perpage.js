@@ -15,6 +15,28 @@ document.addEventListener("DOMContentLoaded", (event) => {
         normalizeScroll: true
     });
 
+    // Defining freeze scroll function
+    function freezeScroll() {
+        if (ScrollSmoother.get() && !ScrollTrigger.isTouch) {
+            ScrollSmoother.get().paused(true);
+            document.querySelector(".smooth-wrapper").style.pointerEvents = "none";
+        } else {
+            document.body.style.overflow = "hidden";
+            document.body.style.touchAction = "none";
+        }
+    }
+
+    // Defining resume scroll function
+    function resumeScroll() {
+        if (ScrollSmoother.get() && !ScrollTrigger.isTouch) {
+            ScrollSmoother.get().paused(false);
+            document.querySelector(".smooth-wrapper").style.pointerEvents = "auto";
+        } else {
+            document.body.style.overflow = "";
+            document.body.style.touchAction = "";
+        }
+    }
+
     // Nav color animation
     let navLight2Dark = document.querySelector(".nav-light2dark");
     let navDark2Light = document.querySelector(".nav-dark2light")
