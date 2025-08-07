@@ -1,4 +1,4 @@
-console.log("connected - how we help - v1.5");
+console.log("connected - how we help - v2");
 
 document.addEventListener("DOMContentLoaded", (event) => {
     gsap.registerPlugin(ScrollTrigger, SplitText)
@@ -58,8 +58,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 
     gsap.utils.toArray(".category-item").forEach((el) => {
-        tl.from(el, {
-            xPercent: (Math.random() - 0.5) * 150,
+        let width = el.getBoundingClientRect().width;
+
+        gsap.set(el, { width: "100%" });
+
+        tl.to(el, {
+            width: `${width}px`,
             ease: "power1.inOut",
             duration: 1.5,
         }, "<70%");
