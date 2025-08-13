@@ -1,12 +1,18 @@
-console.log("connected - scenarios - v2");
+console.log("connected - scenarios - v2.5");
 
 document.addEventListener("DOMContentLoaded", (event) => {    
     // PAGE LOAD
-    gsap.from(".load-split", { 
-        autoAlpha: 0,
-        opacity: 0, 
-        yPercent: 5, 
-        duration: 1,
+    SplitText.create(".load-split", {
+        type: "lines",
+        autoSplit: true,
+        onSplit(self) {
+            return gsap.timeline()
+            .set(".load-split", { visibility: "visible" })
+            .set(self.lines, { opacity: 0 }, "<")
+            .set(".load-split", { opacity: 1 }, "<")
+            .to(self.lines, { opacity: 1, duration: 0.7, stagger: 0.15, ease: "power1.out" })
+            .from(self.lines, { yPercent: 5, duration: 0.7, stagger: 0.15, ease: "power1.out" }, "<")
+        }
     });
 
     let activeItem = null;
@@ -57,4 +63,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         }); 
     });
-})
+});
