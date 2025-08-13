@@ -1,4 +1,4 @@
-console.log("connected - how we help - v2.5");
+console.log("connected - how we help - v3");
 
 document.addEventListener("DOMContentLoaded", (event) => {
     gsap.registerPlugin(ScrollTrigger, SplitText)
@@ -6,10 +6,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const matchM = gsap.matchMedia();
 
     // PAGE LOAD
-    let loadTL = gsap.timeline();
-    loadTL.set(".hero-subhead-wrapper", { visibility: "visible" })
-          .to(".hero-subhead-wrapper", { opacity: 1, duration: 1 })
-          .from(".hero-subhead-wrapper", { yPercent: 5, duration: 1 }, "<");
+    SplitText.create(".load-split", {
+        type: "lines",
+        autoSplit: true,
+        onSplit(self) {
+            return gsap.timeline()
+            .set(".load-split", { visibility: "visible" })
+            .set(".load-para", { visibility: "visible" }, "<")
+            .set(self.lines, { opacity: 0 }, "<")
+            .set(".load-split", { opacity: 1 }, "<")
+            .to(self.lines, { opacity: 1, duration: 0.7, stagger: 0.15, ease: "power1.out" })
+            .from(self.lines, { yPercent: 5, duration: 0.7, stagger: 0.15, ease: "power1.out" }, "<")
+            .to(".load-para", { opacity: 1, duration: 0.7, ease: "power1.out" }, "-=80%")
+            .from(".load-para", { yPercent: 5, duration: 0.7, ease: "power1.out" }, "<")
+        }
+    });
 
     // HEADER ANIMATION
     matchM.add("(min-width: 479px)", () => {
