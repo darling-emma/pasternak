@@ -3,8 +3,7 @@ console.log("connected - per page - v2");
 document.addEventListener("DOMContentLoaded", (event) => {
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
-    // Initialize ScrollSmoother, Desktop only
-
+    // Initialize ScrollSmoother
     ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 start: "top 5%",
                 end: "top top",
                 scrub: true,
-                markers: true,
             },
             "--_colors---colors--nav-color": "#07291D",
         });
@@ -56,7 +54,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 start: "top 5%",
                 end: "top top",
                 scrub: true,
-                markers: true,
             },
             "--_colors---colors--nav-color": "#F9F7F0",
         });
