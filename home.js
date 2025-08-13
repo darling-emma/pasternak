@@ -1,4 +1,4 @@
-console.log("connected - home - V2");
+console.log("connected - home - V2.5");
 
 document.addEventListener("DOMContentLoaded", (event) => {
     gsap.registerPlugin(ScrollTrigger, SplitText)
@@ -29,12 +29,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let heroVideo = hero.querySelector(".fullscreen-video");
 
     // PAGE LOAD
-    gsap.from(".load-split", { 
-        delay: 3.8,
-        autoAlpha: 0,
-        opacity: 0, 
-        yPercent: 5, 
-        duration: 1,
+    SplitText.create(".load-split", {
+        type: "lines",
+        autoSplit: true,
+        onSplit(self) {
+            return gsap.timeline()
+            .to(".load-split", { duration: 3.8 })
+            .set(".load-split", { visibility: "visible" })
+            .set(self.lines, { opacity: 0 }, "<")
+            .set(".load-split", { opacity: 1 }, "<")
+            .to(self.lines, { opacity: 1, duration: 0.7, stagger: 0.15, ease: "power1.out" })
+            .from(self.lines, { yPercent: 5, duration: 0.7, stagger: 0.15, ease: "power1.out" }, "<")
+        }
     });
 
     // HEADER ANIMATION
