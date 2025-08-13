@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // PAGE LOAD
     gsap.from(".hero-subhead-wrapper", { 
-        delay: 4,
         autoAlpha: 0,
         opacity: 0, 
         yPercent: 5, 
