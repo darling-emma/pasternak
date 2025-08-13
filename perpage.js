@@ -1,9 +1,10 @@
-console.log("connected - per page - v1.5");
+console.log("connected - per page - v2");
 
 document.addEventListener("DOMContentLoaded", (event) => {
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
-    // Initialize ScrollSmoother
+    // Initialize ScrollSmoother, Desktop only
+
     ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
@@ -35,27 +36,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     // Nav color animation
-    let navLight2Dark = document.querySelector(".nav-light2dark");
-    let navDark2Light = document.querySelector(".nav-dark2light")
-
-    gsap.to("html", {
-        scrollTrigger: {
-            trigger: navLight2Dark,
-            start: "top 5%",
-            end: "top top",
-            scrub: true,
-        },
-        "--_colors---colors--nav-color": "#07291D",
+    gsap.utils.toArray(".nav-light2dark").forEach((trigger) => {
+        gsap.to("html", {
+            scrollTrigger: {
+                trigger: trigger,
+                start: "top 5%",
+                end: "top top",
+                scrub: true,
+                markers: true,
+            },
+            "--_colors---colors--nav-color": "#07291D",
+        });
     });
 
-    gsap.to("html", {
-        scrollTrigger: {
-            trigger: navDark2Light,
-            start: "top 5%",
-            end: "top top",
-            scrub: true,
-        },
-        "--_colors---colors--nav-color": "#F9F7F0",
+    gsap.utils.toArray(".nav-dark2light").forEach((trigger) => {
+        gsap.to("html", {
+            scrollTrigger: {
+                trigger: trigger,
+                start: "top 5%",
+                end: "top top",
+                scrub: true,
+                markers: true,
+            },
+            "--_colors---colors--nav-color": "#F9F7F0",
+        });
     });
 
     let navTrigger = document.querySelector(".nav-lottie");
