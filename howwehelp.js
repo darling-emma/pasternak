@@ -1,4 +1,4 @@
-console.log("connected - how we help - v2");
+console.log("connected - how we help - v2.5");
 
 document.addEventListener("DOMContentLoaded", (event) => {
     gsap.registerPlugin(ScrollTrigger, SplitText)
@@ -6,12 +6,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const matchM = gsap.matchMedia();
 
     // PAGE LOAD
-    gsap.from(".hero-subhead-wrapper", { 
-        autoAlpha: 0,
-        opacity: 0, 
-        yPercent: 5, 
-        duration: 1,
-    });
+    let loadTL = gsap.timeline();
+    loadTL.set(".hero-subhead-wrapper", { visibility: "visible" })
+          .to(".hero-subhead-wrapper", { opacity: 1, duration: 1 })
+          .from(".hero-subhead-wrapper", { yPercent: 5, duration: 1 }, "<");
 
     // HEADER ANIMATION
     matchM.add("(min-width: 479px)", () => {
